@@ -1,0 +1,54 @@
+create table check_up(
+checkID int primary key identity,
+patientID int,
+complains nvarchar(max),
+findings nvarchar(max),
+treatID int,
+medID int,
+quantity int,
+date Date ,
+equipID int 
+)
+create table equipments(
+equipID int primary key identity,
+equip_name nvarchar(max),
+requested_date Date ,
+date_defected Date
+)
+create table patients(
+patientID int primary key identity,
+first_name nvarchar(max),
+last_name nvarchar(max),
+patient_type nvarchar(max),
+age int ,
+address nvarchar (max)
+
+)
+create table medicines(
+medID int primary key identity,
+med_name nvarchar(max),
+quantity int,
+available_Qty int,
+description nvarchar(max),
+expiry_date Date,
+requested_date Date
+
+)
+
+create table treatments(
+treatID int primary key identity,
+treat_type nvarchar(max),
+
+)
+
+alter table check_up
+add foreign key (patientID) references patients (patientID)
+
+alter table check_up
+add foreign key (treatID) references treatments(treatID)
+
+alter table check_up
+add foreign key (medID) references medicines(medID)
+
+alter table check_up
+add foreign key (equipID) references equipments(equipID)
